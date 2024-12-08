@@ -1,0 +1,21 @@
+import os
+
+def listar_arquivos(diretorio):
+    """Percorre recursivamente os subdiretórios e lista os arquivos."""
+    try:
+        for item in os.listdir(diretorio):
+            caminho_completo = os.path.join(diretorio, item)
+            # Se for um arquivo, imprime
+            if os.path.isfile(caminho_completo):
+                print(f"Arquivo: {caminho_completo}")
+            # Se for um diretório, faz a chamada recursiva
+            elif os.path.isdir(caminho_completo):
+                listar_arquivos(caminho_completo)
+    except PermissionError:
+        print(f"Permissão negada para acessar: {diretorio}")
+    except FileNotFoundError:
+        print(f"O diretório não foi encontrado: {diretorio}")
+
+# Chamada do algoritmo
+diretorio_inicial = "/caminho/para/a/pasta"
+listar_arquivos(diretorio_inicial)
